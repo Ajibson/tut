@@ -1,0 +1,21 @@
+<!-- templates/welcome_mail.html -->
+
+<html>
+  <head>
+    <title>Account Confirmation</title>
+  </head>
+  <body>
+    <h1>Hello, {{ username }}!</h1>
+    <p>
+      With great happiness I welcome you to our great platform, Logistics got
+      much better with Uranse movement.
+    </p>
+    <p>
+      To start as a register user. Please follow this link to confirm your mail:
+    </p>
+    <a
+      href="{{ request.scheme }}://{{ request.get_host }}{% url 'confirm_registration' %}?token={{ confirm_token }}"
+      >Confirm Account</a
+    >
+  </body>
+</html>

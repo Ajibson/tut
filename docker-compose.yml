@@ -1,0 +1,42 @@
+version: '3'
+services:
+  
+  db:
+    image: postgres:latest
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      
+
+  web:
+    build: .
+    command: ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+    environment:
+      DEBUG: ${DEBUG}
+      SECRET_KEY: ${SECRET_KEY}
+    volumes:
+      - .:/app 
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+  
+  redis:
+    image: "redis:alpine"
+    ports:
+      - "6379:6379"
+  
+  celery:
+    build: .
+    command: ["celery", "-A", "ecoms", "worker", "--loglevel=info"]
+    volumes:
+      - .:/app
+    depends_on:
+      - db
+      - redis
+
+volumes:
+  postgres_data:

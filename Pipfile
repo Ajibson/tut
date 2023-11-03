@@ -1,0 +1,26 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+django = "*"
+djangorestframework = "*"
+drf-yasg = "*"
+black = "*"
+coverage = "*"
+elasticsearch-dsl = "*"
+flake8 = "*"
+psycopg2-binary = "*"
+pillow = "*"
+pytest = "*"
+python-dotenv = "*"
+pytest-django = "*"
+celery = "*"
+redis = "*"
+pyjwt = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.9"
